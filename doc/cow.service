@@ -1,0 +1,15 @@
+[Unit]
+Description=cow
+Documentation=https://github.com/cyfdecyf/cow
+After=network.target network-online.target nss-lookup.target mysql.service mariadb.service mysqld.service
+
+[Service]
+Type=simple
+StandardError=journal
+User=louis
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+ExecStart=/usr/bin/cow --rc /home/louis/.cow/rc
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
